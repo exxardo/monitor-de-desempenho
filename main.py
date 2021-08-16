@@ -1,6 +1,7 @@
 import pygame
 import psutil
 import cpuinfo
+import platform
 
 # Definindo cores
 azul = (106, 90, 205)
@@ -24,7 +25,7 @@ def mostra_uso_memoria():
     disponivel = round(mem.available / (1024 * 1024 * 1024), 2)
     texto_barra = f'Memória Total: {total} GB | Disponível: {disponivel} GB | Utilizado: {usado} GB ({mem.percent}%)'
     text = font.render(texto_barra, 1, branco)
-    tela.blit(text, (20, 25))
+    tela.blit(text, (20, 20))
 
 pygame.font.init()
 font = pygame.font.Font(None, 28)
@@ -36,11 +37,11 @@ def mostra_uso_cpu():
     nome = info['brand_raw']
     larg = largura_tela - 2 * 20
     tela.blit(s2, (0, altura_tela/3)) # Superficies
-    pygame.draw.rect(s2, azul, (20, 50, largura_tela-2 * 20, 70)) # Superficies
+    pygame.draw.rect(s2, azul, (20, 20, largura_tela-2 * 20, 70)) # Superficies
     larg = larg * capacidade / 100
-    pygame.draw.rect(s2, vermelho, (20, 50, larg, 70)) # Superficies
+    pygame.draw.rect(s2, vermelho, (20, 20, larg, 70)) # Superficies
     text = font.render(f'Utilização de CPU: {capacidade}% | {nome}', 1, branco)
-    tela.blit(text, (20, 225))
+    tela.blit(text, (20, 190))
 
 pygame.font.init()
 font = pygame.font.Font(None, 28)
@@ -50,15 +51,21 @@ def mostra_uso_disco():
     disco = psutil.disk_usage('.')
     larg = largura_tela - 2 * 20
     tela.blit(s3, (0, 2 * altura_tela/3)) # Superficies
-    pygame.draw.rect(s3, azul, (20, 50, largura_tela-2*20, 70)) # Superficies
+    pygame.draw.rect(s3, azul, (20, 0, largura_tela-2*20, 70)) # Superficies
     larg = larg * disco.percent / 100
-    pygame.draw.rect(s3, vermelho, (20, 50, larg, 70)) # Superficies
+    pygame.draw.rect(s3, vermelho, (20, 0, larg, 70)) # Superficies
     total = round(disco.total / (1024 * 1024 * 1024), 2)
     usado = round(disco.used / (1024 * 1024 * 1024), 2)
     disponivel = round(disco.free / (1024 * 1024 * 1024), 2)
     texto_barra = f'Amazenamento Total: {total} GB | Disponível: {disponivel} GB | Utilizado: {usado} GB ({disco.percent}%)'
     text = font.render(texto_barra, 1, branco)
-    tela.blit(text, (20, 425))
+    tela.blit(text, (20, 370))
+
+def datalhar_processador():
+    print(platform.processor())
+    print(platform.node())
+    print(platform.platform())
+    print(platform.system())
 
 # Cria relógio
 clock = pygame.time.Clock()
