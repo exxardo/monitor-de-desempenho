@@ -9,7 +9,7 @@ branco = (255, 255, 255)
 preto = (0, 0, 0)
 
 pygame.font.init()
-font = pygame.font.Font(None, 32)
+font = pygame.font.Font(None, 28)
 
 # Mostrar uso da memória:
 def mostra_uso_memoria():
@@ -22,12 +22,12 @@ def mostra_uso_memoria():
     total = round(mem.total / (1024 * 1024 * 1024), 2)
     usado = round(mem.used / (1024 * 1024 * 1024), 2)
     disponivel = round(mem.available / (1024 * 1024 * 1024), 2)
-    texto_barra = f'Memória Total: {total} GB | Consumido: {usado} GB | Disponível: {disponivel} GB'
+    texto_barra = f'Memória Total: {total} GB | Disponível: {disponivel} GB | Utilizado: {usado} GB ({mem.percent}%)'
     text = font.render(texto_barra, 1, branco)
-    tela.blit(text, (20, 10))
+    tela.blit(text, (20, 25))
 
 pygame.font.init()
-font = pygame.font.Font(None, 32)
+font = pygame.font.Font(None, 28)
 
 # Mostrar uso de CPU:
 def mostra_uso_cpu():
@@ -40,10 +40,10 @@ def mostra_uso_cpu():
     larg = larg * capacidade / 100
     pygame.draw.rect(s2, vermelho, (20, 50, larg, 70)) # Superficies
     text = font.render(f'Utilização de CPU: {capacidade}% | {nome}', 1, branco)
-    tela.blit(text, (20, 210))
+    tela.blit(text, (20, 225))
 
 pygame.font.init()
-font = pygame.font.Font(None, 32)
+font = pygame.font.Font(None, 28)
 
 # Mostrar o uso de disco local
 def mostra_uso_disco():
@@ -56,9 +56,9 @@ def mostra_uso_disco():
     total = round(disco.total / (1024 * 1024 * 1024), 2)
     usado = round(disco.used / (1024 * 1024 * 1024), 2)
     disponivel = round(disco.free / (1024 * 1024 * 1024), 2)
-    texto_barra = f'Amazenamento Total: {total} GB | Consumido: {usado} GB | Disponível: {disponivel} GB'
+    texto_barra = f'Amazenamento Total: {total} GB | Disponível: {disponivel} GB | Utilizado: {usado} GB ({disco.percent}%)'
     text = font.render(texto_barra, 1, branco)
-    tela.blit(text, (20, 410))
+    tela.blit(text, (20, 425))
 
 # Cria relógio
 clock = pygame.time.Clock()
