@@ -62,11 +62,22 @@ def mostra_uso_disco():
     tela.blit(text, (20, 370))
 
 def datalhar_processador():
-    print(platform.processor())
-    print(platform.node())
-    print(platform.platform())
-    print(platform.system())
+    processador = platform.processor()
+    text = font.render(processador, 1, branco)
+    tela.blit(text, (20, 520))
 
+def datalhar_plataforma():
+    plataforma = platform.platform()
+    text = font.render(plataforma, 1, branco)
+    tela.blit(text, (20, 540))
+    
+def mostra_ip():
+    dic_interfaces = psutil.net_if_addrs()
+    ip_maquina = dic_interfaces['Ethernet 2'][0].address
+    texto_barra = f'Endereço da máquina: {ip_maquina}'
+    text = font.render(texto_barra, 1, branco)
+    tela.blit(text, (20, 560))
+    
 # Cria relógio
 clock = pygame.time.Clock()
 cont = 60
@@ -93,6 +104,9 @@ while not terminou:
         mostra_uso_memoria()
         mostra_uso_cpu()
         mostra_uso_disco()
+        datalhar_processador()
+        datalhar_plataforma()
+        mostra_ip()
         cont = 0
         
     # Atualiza o desenho na tela
