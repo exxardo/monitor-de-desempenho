@@ -3,16 +3,16 @@ import psutil
 import cpuinfo
 import platform
 
-# Definindo cores
+# Definição das cores
 azul = (106, 90, 205)
 vermelho = (255, 99, 71)
 branco = (255, 255, 255)
 preto = (0, 0, 0)
 
+# Mostrar uso da memória:
 pygame.font.init()
 font = pygame.font.Font(None, 28)
 
-# Mostrar uso da memória:
 def mostra_uso_memoria():
     mem = psutil.virtual_memory()
     larg = largura_tela - 2 * 20
@@ -27,14 +27,14 @@ def mostra_uso_memoria():
     text = font.render(texto_barra, 1, branco)
     tela.blit(text, (20, 20))
 
+# Mostrar uso de CPU:
 pygame.font.init()
 font = pygame.font.Font(None, 28)
 
-# Mostrar uso de CPU:
 def mostra_uso_cpu():
     capacidade = psutil.cpu_percent(interval=0)
-    info = cpuinfo.get_cpu_info()
-    nome = info['brand_raw']
+    info = cpuinfo.get_cpu_info() # Nomeclatura do processador
+    nome = info['brand_raw'] # Nomeclatura do processador
     larg = largura_tela - 2 * 20
     tela.blit(superficie_2, (0, altura_tela/3)) # Superficies
     pygame.draw.rect(superficie_2, azul, (20, 20, largura_tela-2 * 20, 70)) # Superficies
@@ -43,10 +43,10 @@ def mostra_uso_cpu():
     text = font.render(f'Utilização de CPU: {capacidade}% | {nome}', 1, branco)
     tela.blit(text, (20, 190))
 
+# Mostrar o uso de disco local    
 pygame.font.init()
 font = pygame.font.Font(None, 28)
 
-# Mostrar o uso de disco local
 def mostra_uso_disco():
     disco = psutil.disk_usage('.')
     larg = largura_tela - 2 * 20
@@ -61,16 +61,20 @@ def mostra_uso_disco():
     text = font.render(texto_barra, 1, branco)
     tela.blit(text, (20, 370))
 
+# Mais informações
+    # Info do processador
 def datalhar_processador():
     processador = platform.processor()
     text = font.render(processador, 1, branco)
     tela.blit(text, (20, 520))
-
+    
+    # Info da versão do sistema
 def datalhar_plataforma():
     plataforma = platform.platform()
     text = font.render(plataforma, 1, branco)
     tela.blit(text, (20, 540))
     
+    #Info do endereço de rede
 def mostra_ip():
     dic_interfaces = psutil.net_if_addrs()
     ip_maquina = dic_interfaces['Conexão Local* 1'][0].address
@@ -78,25 +82,25 @@ def mostra_ip():
     text = font.render(texto_barra, 1, branco)
     tela.blit(text, (20, 560))
     
-# Cria relógio
+# Cria relógio para chacagem dos eventos do mouse
 clock = pygame.time.Clock()
 cont = 60
 
-# Iniciando a janela principal
+# Janela principal
 largura_tela = 900 # Pixels
 altura_tela = 600 # Pixels
 tela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption('Uso de recursos do computador')
 pygame.display.init()
 
-# Varíaveis organização das informações em superficie
+# Superficies de plotagem dos marcadores de consumo: azul e vermelho
 superficie_1 = pygame.surface.Surface((largura_tela, altura_tela / 3))
 superficie_2 = pygame.surface.Surface((largura_tela, altura_tela / 3))
 superficie_3 = pygame.surface.Surface((largura_tela, altura_tela / 3))
 
+# Checar os eventos do mouse aqui:
 terminou = False
 while not terminou:
-    # Checar os eventos do mouse aqui:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             terminou = True
