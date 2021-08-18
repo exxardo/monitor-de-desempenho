@@ -16,10 +16,10 @@ font = pygame.font.Font(None, 28)
 def mostra_uso_memoria():
     mem = psutil.virtual_memory()
     larg = largura_tela - 2 * 20
-    tela.blit(s1, (0, 0)) # Superficies
-    pygame.draw.rect(s1, azul, (20, 50, largura_tela-2 * 20, 70)) # Superficies
+    tela.blit(superficie_1, (0, 0)) # Superficies
+    pygame.draw.rect(superficie_1, azul, (20, 50, largura_tela-2 * 20, 70)) # Superficies
     larg = larg * mem.percent / 100
-    pygame.draw.rect(s1, vermelho, (20, 50, larg, 70)) # Superficies
+    pygame.draw.rect(superficie_1, vermelho, (20, 50, larg, 70)) # Superficies
     total = round(mem.total / (1024 * 1024 * 1024), 2)
     usado = round(mem.used / (1024 * 1024 * 1024), 2)
     disponivel = round(mem.available / (1024 * 1024 * 1024), 2)
@@ -36,10 +36,10 @@ def mostra_uso_cpu():
     info = cpuinfo.get_cpu_info()
     nome = info['brand_raw']
     larg = largura_tela - 2 * 20
-    tela.blit(s2, (0, altura_tela/3)) # Superficies
-    pygame.draw.rect(s2, azul, (20, 20, largura_tela-2 * 20, 70)) # Superficies
+    tela.blit(superficie_2, (0, altura_tela/3)) # Superficies
+    pygame.draw.rect(superficie_2, azul, (20, 20, largura_tela-2 * 20, 70)) # Superficies
     larg = larg * capacidade / 100
-    pygame.draw.rect(s2, vermelho, (20, 20, larg, 70)) # Superficies
+    pygame.draw.rect(superficie_2, vermelho, (20, 20, larg, 70)) # Superficies
     text = font.render(f'Utilização de CPU: {capacidade}% | {nome}', 1, branco)
     tela.blit(text, (20, 190))
 
@@ -50,10 +50,10 @@ font = pygame.font.Font(None, 28)
 def mostra_uso_disco():
     disco = psutil.disk_usage('.')
     larg = largura_tela - 2 * 20
-    tela.blit(s3, (0, 2 * altura_tela/3)) # Superficies
-    pygame.draw.rect(s3, azul, (20, 0, largura_tela-2*20, 70)) # Superficies
+    tela.blit(superficie_3, (0, 2 * altura_tela/3)) # Superficies
+    pygame.draw.rect(superficie_3, azul, (20, 0, largura_tela-2*20, 70)) # Superficies
     larg = larg * disco.percent / 100
-    pygame.draw.rect(s3, vermelho, (20, 0, larg, 70)) # Superficies
+    pygame.draw.rect(superficie_3, vermelho, (20, 0, larg, 70)) # Superficies
     total = round(disco.total / (1024 * 1024 * 1024), 2)
     usado = round(disco.used / (1024 * 1024 * 1024), 2)
     disponivel = round(disco.free / (1024 * 1024 * 1024), 2)
@@ -73,7 +73,7 @@ def datalhar_plataforma():
     
 def mostra_ip():
     dic_interfaces = psutil.net_if_addrs()
-    ip_maquina = dic_interfaces['Ethernet 2'][0].address
+    ip_maquina = dic_interfaces['Conexão Local* 1'][0].address
     texto_barra = f'Endereço da máquina: {ip_maquina}'
     text = font.render(texto_barra, 1, branco)
     tela.blit(text, (20, 560))
@@ -90,9 +90,9 @@ pygame.display.set_caption('Uso de recursos do computador')
 pygame.display.init()
 
 # Varíaveis organização das informações em superficie
-s1 = pygame.surface.Surface((largura_tela, altura_tela / 3))
-s2 = pygame.surface.Surface((largura_tela, altura_tela / 3))
-s3 = pygame.surface.Surface((largura_tela, altura_tela / 3))
+superficie_1 = pygame.surface.Surface((largura_tela, altura_tela / 3))
+superficie_2 = pygame.surface.Surface((largura_tela, altura_tela / 3))
+superficie_3 = pygame.surface.Surface((largura_tela, altura_tela / 3))
 
 terminou = False
 while not terminou:
