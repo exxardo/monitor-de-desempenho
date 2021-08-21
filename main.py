@@ -20,6 +20,7 @@ def mostra_uso_memoria():
     pygame.draw.rect(superficie_1, azul, (20, 50, largura_tela-2 * 20, 70)) # Superficies
     larg = larg * mem.percent / 100
     pygame.draw.rect(superficie_1, vermelho, (20, 50, larg, 70)) # Superficies
+    
     total = round(mem.total / (1024 * 1024 * 1024), 2)
     usado = round(mem.used / (1024 * 1024 * 1024), 2)
     disponivel = round(mem.available / (1024 * 1024 * 1024), 2)
@@ -54,6 +55,7 @@ def mostra_uso_disco():
     pygame.draw.rect(superficie_3, azul, (20, 0, largura_tela-2*20, 70)) # Superficies
     larg = larg * disco.percent / 100
     pygame.draw.rect(superficie_3, vermelho, (20, 0, larg, 70)) # Superficies
+    
     total = round(disco.total / (1024 * 1024 * 1024), 2)
     usado = round(disco.used / (1024 * 1024 * 1024), 2)
     disponivel = round(disco.free / (1024 * 1024 * 1024), 2)
