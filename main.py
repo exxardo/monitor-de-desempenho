@@ -4,7 +4,6 @@ import cpuinfo
 import platform
 
 # Definição das cores
-verde = (0, 0, 0)
 vermelho = (139, 0, 0)
 branco = (255, 255, 255)
 preto = (0, 0, 0)
@@ -17,7 +16,7 @@ def mostra_uso_memoria():
     mem = psutil.virtual_memory()
     larg = largura_tela - 2 * 20
     tela.blit(superficie_1, (0, 0)) # Superficies
-    pygame.draw.rect(superficie_1, verde, (20, 50, largura_tela-2 * 20, 70)) # Superficies
+    pygame.draw.rect(superficie_1, preto, (20, 50, largura_tela-2 * 20, 70)) # Superficies
     larg = larg * mem.percent / 100
     pygame.draw.rect(superficie_1, vermelho, (20, 50, larg, 70)) # Superficies
     
@@ -38,7 +37,7 @@ def mostra_uso_cpu():
     nome = info['brand_raw'] # Nomeclatura do processador
     larg = largura_tela - 2 * 20
     tela.blit(superficie_2, (0, altura_tela/3)) # Superficies
-    pygame.draw.rect(superficie_2, verde, (20, 20, largura_tela-2 * 20, 70)) # Superficies
+    pygame.draw.rect(superficie_2, preto, (20, 20, largura_tela-2 * 20, 70)) # Superficies
     larg = larg * capacidade / 100
     pygame.draw.rect(superficie_2, vermelho, (20, 20, larg, 70)) # Superficies
     text = font.render(f'Utilização de CPU: {capacidade}% | {nome}', 1, branco)
@@ -52,7 +51,7 @@ def mostra_uso_disco():
     disco = psutil.disk_usage('.')
     larg = largura_tela - 2 * 20
     tela.blit(superficie_3, (0, 2 * altura_tela/3)) # Superficies
-    pygame.draw.rect(superficie_3, verde, (20, 0, largura_tela-2*20, 70)) # Superficies
+    pygame.draw.rect(superficie_3, preto, (20, 0, largura_tela-2*20, 70)) # Superficies
     larg = larg * disco.percent / 100
     pygame.draw.rect(superficie_3, vermelho, (20, 0, larg, 70)) # Superficies
     
@@ -95,7 +94,7 @@ tela = pygame.display.set_mode((largura_tela, altura_tela))
 pygame.display.set_caption('Uso de recursos do computador')
 pygame.display.init()
 
-# Superficies de plotagem dos marcadores de consumo: verde e vermelho
+# Superficies de plotagem dos marcadores de consumo: preto e vermelho
 superficie_1 = pygame.surface.Surface((largura_tela, altura_tela / 3))
 superficie_2 = pygame.surface.Surface((largura_tela, altura_tela / 3))
 superficie_3 = pygame.surface.Surface((largura_tela, altura_tela / 3))
